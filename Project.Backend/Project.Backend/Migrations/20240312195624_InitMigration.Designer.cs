@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.Backend.Entities;
 
@@ -11,9 +12,11 @@ using Project.Backend.Entities;
 namespace Project.Backend.Migrations
 {
     [DbContext(typeof(ProjectDBContext))]
-    partial class ProjectDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240312195624_InitMigration")]
+    partial class InitMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -381,7 +384,7 @@ namespace Project.Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AddressId")
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
@@ -403,6 +406,9 @@ namespace Project.Backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFavorite")
                         .HasColumnType("bit");
 
                     b.Property<decimal>("MinOrder")
@@ -459,6 +465,20 @@ namespace Project.Backend.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("cac43a6e-f7bb-4448-baaf-1add431ccbbf"),
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = new Guid("cbc43a8e-f7bb-4445-baaf-1add431ffbbf"),
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
                 });
 
             modelBuilder.Entity("Project.Backend.Entities.User", b =>
@@ -539,6 +559,26 @@ namespace Project.Backend.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "49a233cb-e241-4670-953a-8a26213d623c",
+                            Email = "admin@localhost.com",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            Name = "System Admin",
+                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
+                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHp890idxr+BzrTShcDBu63g195y7usuxIPW5ktzLZRO3kbhEwZQj+GaHNvXRJ1tHQ==",
+                            PhoneNumber = "224466889",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "admin@localhost.com"
+                        });
                 });
 
             modelBuilder.Entity("Project.Backend.Entities.UserAddresses", b =>
@@ -576,6 +616,13 @@ namespace Project.Backend.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>");
 
                     b.HasDiscriminator().HasValue("UserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("8e445865-a24d-4543-a6c6-9443d048cdb9"),
+                            RoleId = new Guid("cbc43a8e-f7bb-4445-baaf-1add431ffbbf")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -730,7 +777,9 @@ namespace Project.Backend.Migrations
                 {
                     b.HasOne("Project.Backend.Entities.Address", "Address")
                         .WithMany("Restuarants")
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
                 });

@@ -13,6 +13,7 @@ namespace Project.Backend.Entities
         public int? Appartment { get; set; }
         public virtual List<UserAddresses>? UserAddresses { get; set; }
         public virtual List<Resturant>? Restuarants { get; set; }
+        public virtual List<Order>? Orders { get; set; }
 
 
     }

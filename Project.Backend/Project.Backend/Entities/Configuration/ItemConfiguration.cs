@@ -16,6 +16,14 @@ namespace Project.Backend.Entities.Configuration
                .HasOne(c => c.Order)
                .WithMany(c => c.Items)
                .HasForeignKey(c => c.OrderId);
+            builder
+              .HasOne(c => c.Dish)
+              .WithMany(c => c.Items)
+              .HasForeignKey(c => c.DishId);
+            builder
+              .HasOne(c => c.DishSize)
+              .WithMany(c => c.Items)
+              .HasForeignKey(c => c.DishSizeId);
 
         }
     }

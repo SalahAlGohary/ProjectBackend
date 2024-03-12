@@ -10,6 +10,7 @@ namespace Project.Backend.Entities
         public Guid? ResturantId { get; set; }
         public virtual Resturant? Resturant { get; set; }
         public virtual List<DishSize>? DishSizes { get; set; }
+        public virtual List<Item>? Items { get; set; }
 
 
 

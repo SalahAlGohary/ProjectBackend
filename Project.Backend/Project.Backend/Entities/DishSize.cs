@@ -7,6 +7,7 @@ namespace Project.Backend.Entities
         public decimal Price { get; set; }
         public Guid DishId { get; set; }
         public virtual Dish Dish { get; set; }
+        public virtual List<Item>? Items { get; set; }
 
     }
 }
