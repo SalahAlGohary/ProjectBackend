@@ -16,5 +16,6 @@ namespace Project.Backend.Models.Dtos.Resturant
         public PaymentOption PaymentOption { get; set; }
         public decimal MinOrder { get; set; }
         public string? Category { get; set; }
+
     }
 }

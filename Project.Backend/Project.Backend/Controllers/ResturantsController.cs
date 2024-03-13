@@ -28,7 +28,7 @@ namespace Project.Backend.Controllers
         public async Task<ActionResult<List<GetResturantDto>>> GetRestuarants()
         {
             var listOfResturantsDto = new List<GetResturantDto>();
-            var listOfResturants = await _context.Restuarants.Where(x => x.IsDeleted == false).ToListAsync();
+            var listOfResturants = await _context.Restuarants.Include(a => a.Address).Where(x => x.IsDeleted == false).ToListAsync();
             if (listOfResturants.Any())
             {
                 foreach (var item in listOfResturants)
@@ -65,7 +65,6 @@ namespace Project.Backend.Controllers
             }
             var resturant = _mapper.Map<Resturant>(resturantDto);
             _context.Entry(resturant).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();

@@ -14,7 +14,7 @@ namespace Project.Backend.Models.Profiles
             CreateMap<CreateResturantDto, Resturant>()
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.Now));
             CreateMap<UpdateResturantDto, Resturant>()
-                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now)); ;
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.Now));
         }
         private string CompineAddress(Address address)
         {
@@ -26,27 +26,27 @@ namespace Project.Backend.Models.Profiles
                     result.Append(address.City);
                     result.Append(" - ");
                 }
-                if (address.City != null)
+                if (address.Street != null)
                 {
                     result.Append(address.Street);
                     result.Append(" - ");
                 }
-                if (address.City != null)
+                if (address.Line1 != null)
                 {
                     result.Append(address.Line1);
                     result.Append(" - ");
                 }
-                if (address.City != null)
+                if (address.Line2 != null)
                 {
                     result.Append(address.Line2);
                     result.Append(" - ");
                 }
-                if (address.City != null)
+                if (address.Floor != null)
                 {
                     result.Append(address.Floor);
                     result.Append(" - ");
                 }
-                if (address.City != null)
+                if (address.Appartment != null)
                 {
                     result.Append(address.Appartment);
                     result.Append(" - ");

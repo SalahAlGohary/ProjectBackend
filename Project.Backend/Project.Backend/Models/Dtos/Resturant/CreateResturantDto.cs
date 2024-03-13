@@ -1,4 +1,5 @@
 ﻿using Project.Backend.Enums;
+using Project.Backend.Models.Dtos.Address;
 
 namespace Project.Backend.Models.Dtos.Resturant
 {
@@ -15,5 +16,6 @@ namespace Project.Backend.Models.Dtos.Resturant
         public PaymentOption PaymentOption { get; set; }
         public decimal MinOrder { get; set; }
         public string? Category { get; set; }
+        public CreateAddressDto Address { get; set; }
     }
 }
