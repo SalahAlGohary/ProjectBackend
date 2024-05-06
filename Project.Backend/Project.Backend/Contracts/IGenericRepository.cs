@@ -1,4 +1,4 @@
-﻿namespace Project.Backend.Repositories
+﻿namespace Project.Backend.Contracts
 {
     public interface IGenericRepository<T> where T : class
     {

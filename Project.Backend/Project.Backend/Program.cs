@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Project.Backend.Contracts;
 using Project.Backend.Entities;
 using Project.Backend.Repositories;
 using System.Reflection;
@@ -20,12 +21,12 @@ builder.Services.AddDbContext<ProjectDBContext>(options =>
 options.UseSqlServer(
            configuration.GetConnectionString("ProjectBackendConnectionString")));
 builder.Services.AddTransient<ImageController>();
-builder.Services.AddTransient<AddressRepository>();
+builder.Services.AddTransient<IAddressRepository, AddressRepository>();
 builder.Services.AddTransient<DishRepository>();
 builder.Services.AddTransient<DietRepository>();
 builder.Services.AddTransient<CourseRepository>();
 builder.Services.AddTransient<CuisineRepository>();
-builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<FavoriteRepository>();
 builder.Services.AddTransient<RecommendationRepository>();
 

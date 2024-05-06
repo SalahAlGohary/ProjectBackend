@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Project.Backend.Contracts;
 using Project.Backend.Entities;
 using Project.Backend.Entities.Common;
 
@@ -33,7 +34,7 @@ namespace Project.Backend.Repositories
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _context.Set<T>().AsNoTracking().Where(q => q.IsDeleted != true).ToListAsync();
+            return await _context.Set<T>().AsNoTracking().Where(q => !q.IsDeleted).ToListAsync();
 
         }
 
@@ -41,7 +42,7 @@ namespace Project.Backend.Repositories
         {
             return await _context.Set<T>()
                .AsNoTracking()
-               .FirstOrDefaultAsync(q => q.Id == id && q.IsDeleted != true);
+               .FirstOrDefaultAsync(q => q.Id == id && !q.IsDeleted);
 
         }
 
