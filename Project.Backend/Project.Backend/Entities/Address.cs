@@ -11,10 +11,8 @@ namespace Project.Backend.Entities
         public string? BuildingNumber { get; set; }
         public int? Floor { get; set; }
         public int? Appartment { get; set; }
-        public virtual List<UserAddresses>? UserAddresses { get; set; }
-        public virtual List<Resturant>? Restuarants { get; set; }
-        public virtual List<Order>? Orders { get; set; }
-
+        public Guid? UserId { get; set; }
+        public User? User { get; set; }
 
     }
 }

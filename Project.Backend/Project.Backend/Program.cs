@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Project.Backend.Entities;
+using Project.Backend.Repositories;
 using System.Reflection;
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -12,11 +13,22 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddDbContext<ProjectDBContext>(options =>
 options.UseSqlServer(
            configuration.GetConnectionString("ProjectBackendConnectionString")));
 builder.Services.AddTransient<ImageController>();
+builder.Services.AddTransient<AddressRepository>();
+builder.Services.AddTransient<DishRepository>();
+builder.Services.AddTransient<DietRepository>();
+builder.Services.AddTransient<CourseRepository>();
+builder.Services.AddTransient<CuisineRepository>();
+builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddTransient<FavoriteRepository>();
+builder.Services.AddTransient<RecommendationRepository>();
+
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("CorsPolicy",
@@ -35,7 +47,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 app.UseSwagger();

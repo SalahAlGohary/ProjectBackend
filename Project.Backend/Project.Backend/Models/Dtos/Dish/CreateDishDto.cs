@@ -6,6 +6,5 @@
         public string? NameAr { get; set; }
         public decimal? Description { get; set; }
         public string? CoverUrl { get; set; }
-        public virtual List<CreateDishSizeDto>? DishSizes { get; set; }
     }
 }

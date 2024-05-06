@@ -2,11 +2,13 @@
 
 namespace Project.Backend.Entities
 {
-    public class UserAddresses : BaseEntity
+    public class Favorite : BaseEntity
     {
+        public Guid DishId { get; set; }
         public Guid UserId { get; set; }
-        public Guid AddressId { get; set; }
         public virtual User User { get; set; }
-        public virtual Address Address { get; set; }
+        public virtual Dish Dish { get; set; }
+
+
     }
 }
