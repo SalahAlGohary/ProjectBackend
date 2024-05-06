@@ -23,22 +23,22 @@ builder.Services.AddDbContext<ProjectDBContext>(options =>
 options.UseSqlServer(
            configuration.GetConnectionString("ProjectBackendConnectionString")));
 builder.Services.AddTransient<ImageController>();
-builder.Services.AddTransient<IAddressRepository, AddressRepository>();
-builder.Services.AddTransient<IDishRepository, DishRepository>();
-builder.Services.AddTransient<IDietRepository, DietRepository>();
-builder.Services.AddTransient<ICourseRepository, CourseRepository>();
-builder.Services.AddTransient<ICuisineRepository, CuisineRepository>();
-builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
-builder.Services.AddTransient<IFavoriteRepository, FavoriteRepository>();
-builder.Services.AddTransient<IRecommendationRepository, RecommendationRepository>();
-builder.Services.AddTransient<IAddressService, AddressService>();
-builder.Services.AddTransient<ICategoryService, CategoryService>();
-builder.Services.AddTransient<ICourseService, CourseService>();
-builder.Services.AddTransient<ICuisineService, CuisineService>();
-builder.Services.AddTransient<IDietService, DietService>();
-builder.Services.AddTransient<IDishService, DishService>();
-builder.Services.AddTransient<IFavoriteService, FavoriteService>();
-builder.Services.AddTransient<IRecommendationService, RecommendationService>();
+builder.Services.AddTransient(typeof(IAddressRepository), typeof(AddressRepository));
+builder.Services.AddTransient(typeof(IDishRepository), typeof(DishRepository));
+builder.Services.AddTransient(typeof(IDietRepository), typeof(DietRepository));
+builder.Services.AddTransient(typeof(ICourseRepository), typeof(CourseRepository));
+builder.Services.AddTransient(typeof(ICuisineRepository), typeof(CuisineRepository));
+builder.Services.AddTransient(typeof(ICategoryRepository), typeof(CategoryRepository));
+builder.Services.AddTransient(typeof(IFavoriteRepository), typeof(FavoriteRepository));
+builder.Services.AddTransient(typeof(IRecommendationRepository), typeof(RecommendationRepository));
+builder.Services.AddTransient(typeof(IAddressService), typeof(AddressService));
+builder.Services.AddTransient(typeof(ICategoryService), typeof(CategoryService));
+builder.Services.AddTransient(typeof(ICourseService), typeof(CourseService));
+builder.Services.AddTransient(typeof(ICuisineService), typeof(CuisineService));
+builder.Services.AddTransient(typeof(IDietService), typeof(DietService));
+builder.Services.AddTransient(typeof(IDishService), typeof(DishService));
+builder.Services.AddTransient(typeof(IFavoriteService), typeof(FavoriteService));
+builder.Services.AddTransient(typeof(IRecommendationService), typeof(RecommendationService));
 
 
 builder.Services.AddCors(o =>
