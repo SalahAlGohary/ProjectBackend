@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Project.Backend.Contracts;
+using Project.Backend.Contracts.Services;
 using Project.Backend.Entities;
 using Project.Backend.Repositories;
+using Project.Backend.Services;
 using System.Reflection;
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -22,13 +24,22 @@ options.UseSqlServer(
            configuration.GetConnectionString("ProjectBackendConnectionString")));
 builder.Services.AddTransient<ImageController>();
 builder.Services.AddTransient<IAddressRepository, AddressRepository>();
-builder.Services.AddTransient<DishRepository>();
-builder.Services.AddTransient<DietRepository>();
-builder.Services.AddTransient<CourseRepository>();
-builder.Services.AddTransient<CuisineRepository>();
+builder.Services.AddTransient<IDishRepository, DishRepository>();
+builder.Services.AddTransient<IDietRepository, DietRepository>();
+builder.Services.AddTransient<ICourseRepository, CourseRepository>();
+builder.Services.AddTransient<ICuisineRepository, CuisineRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
-builder.Services.AddTransient<FavoriteRepository>();
-builder.Services.AddTransient<RecommendationRepository>();
+builder.Services.AddTransient<IFavoriteRepository, FavoriteRepository>();
+builder.Services.AddTransient<IRecommendationRepository, RecommendationRepository>();
+builder.Services.AddTransient<IAddressService, AddressService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<ICourseService, CourseService>();
+builder.Services.AddTransient<ICuisineService, CuisineService>();
+builder.Services.AddTransient<IDietService, DietService>();
+builder.Services.AddTransient<IDishService, DishService>();
+builder.Services.AddTransient<IFavoriteService, FavoriteService>();
+builder.Services.AddTransient<IRecommendationService, RecommendationService>();
+
 
 builder.Services.AddCors(o =>
 {

@@ -1,8 +1,9 @@
-﻿using Project.Backend.Entities;
+﻿using Project.Backend.Contracts;
+using Project.Backend.Entities;
 
 namespace Project.Backend.Repositories
 {
-    public abstract class CuisineRepository : GenericRepository<Cuisine>
+    public abstract class CuisineRepository : GenericRepository<Cuisine>, ICuisineRepository
     {
         ProjectDBContext _context;
         public CuisineRepository(ProjectDBContext context) : base(context)

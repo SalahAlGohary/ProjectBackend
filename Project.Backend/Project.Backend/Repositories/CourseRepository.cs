@@ -1,8 +1,9 @@
-﻿using Project.Backend.Entities;
+﻿using Project.Backend.Contracts;
+using Project.Backend.Entities;
 
 namespace Project.Backend.Repositories
 {
-    public abstract class CourseRepository : GenericRepository<Course>
+    public abstract class CourseRepository : GenericRepository<Course>, ICourseRepository
     {
         ProjectDBContext _context;
         public CourseRepository(ProjectDBContext context) : base(context)

@@ -2,7 +2,7 @@
 
 namespace Project.Backend.Services
 {
-    public class DishService : IDishService
+    public class AddressService : IAddressService
     {
     }
 }
