@@ -3,7 +3,7 @@ using Project.Backend.Entities;
 
 namespace Project.Backend.Repositories
 {
-    public abstract class RecommendationRepository : GenericRepository<Recommendation>, IRecommendationRepository
+    public class RecommendationRepository : GenericRepository<Recommendation>, IRecommendationRepository
     {
         ProjectDBContext _context;
         public RecommendationRepository(ProjectDBContext context) : base(context)

@@ -3,7 +3,7 @@ using Project.Backend.Entities;
 
 namespace Project.Backend.Repositories
 {
-    public abstract class FavoriteRepository : GenericRepository<Favorite>, IFavoriteRepository
+    public class FavoriteRepository : GenericRepository<Favorite>, IFavoriteRepository
     {
         ProjectDBContext _context;
         public FavoriteRepository(ProjectDBContext context) : base(context)

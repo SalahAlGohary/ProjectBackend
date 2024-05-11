@@ -2,7 +2,7 @@
 
 namespace Project.Backend.Contracts
 {
-    public interface IDietRepository : IGenericRepository<Diet>
+    public interface IDietRepository : IGenericRepository<DietType>
     {
     }
 }

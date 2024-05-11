@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Project.Backend.Entities.Configuration
 {
-    public class DishConfiguration : IEntityTypeConfiguration<Dish>
+    public class RecipeConfiguration : IEntityTypeConfiguration<FoodRecipe>
     {
-        public void Configure(EntityTypeBuilder<Dish> builder)
+        public void Configure(EntityTypeBuilder<FoodRecipe> builder)
         {
-            builder.ToTable("Dish");
+            builder.ToTable("Recipe");
         }
     }
 }

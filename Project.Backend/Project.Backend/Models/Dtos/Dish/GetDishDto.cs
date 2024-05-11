@@ -1,6 +1,6 @@
-﻿namespace Project.Backend.Models.Dtos.Dish
+﻿namespace Project.Backend.Models.Dtos.Recipe
 {
-    public class GetDishDto
+    public class GetRecipeDto
     {
         public Guid Id { get; set; }
         public string? NameEn { get; set; }

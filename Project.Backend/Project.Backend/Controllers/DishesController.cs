@@ -6,13 +6,13 @@ namespace Project.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DishsController : ControllerBase
+    public class RecipesController : ControllerBase
     {
         private readonly ProjectDBContext _context;
         private readonly IMapper _mapper;
         private readonly ImageController _imageController;
 
-        public DishsController(ProjectDBContext context,
+        public RecipesController(ProjectDBContext context,
             IMapper mapper,
             ImageController imageController)
         {
@@ -21,75 +21,75 @@ namespace Project.Backend.Controllers
             _imageController = imageController;
         }
 
-        // GET: api/Dishs
+        // GET: api/Recipes
         //[HttpGet("GetByResturantId/{ResturantId}")]
-        //public async Task<ActionResult<List<GetDishDto>>> GetDishsBy(Guid ResturantId)
+        //public async Task<ActionResult<List<GetRecipeDto>>> GetRecipesBy(Guid ResturantId)
         //{
-        //    var listOfDishsDto = new List<GetDishDto>();
-        //    var listOfDishs = await _context.Dishes.Include(a => a.DishSizes).Where(x => x.IsDeleted == false && x.ResturantId == ResturantId).ToListAsync();
-        //    if (listOfDishs.Any())
+        //    var listOfRecipesDto = new List<GetRecipeDto>();
+        //    var listOfRecipes = await _context.Recipees.Include(a => a.RecipeSizes).Where(x => x.IsDeleted == false && x.ResturantId == ResturantId).ToListAsync();
+        //    if (listOfRecipes.Any())
         //    {
-        //        foreach (var item in listOfDishs)
+        //        foreach (var item in listOfRecipes)
         //        {
-        //            var dto = _mapper.Map<GetDishDto>(item);
-        //            listOfDishsDto.Add(dto);
+        //            var dto = _mapper.Map<GetRecipeDto>(item);
+        //            listOfRecipesDto.Add(dto);
         //        }
         //    }
-        //    return listOfDishsDto;
+        //    return listOfRecipesDto;
         //}
-        //[HttpGet("GetByDishId/{DishId}")]
-        //public async Task<ActionResult<List<GetDishSizeDto>>> GetDishSizesByDishId(Guid DishId)
+        //[HttpGet("GetByRecipeId/{RecipeId}")]
+        //public async Task<ActionResult<List<GetRecipeSizeDto>>> GetRecipeSizesByRecipeId(Guid RecipeId)
         //{
-        //    var listOfDishSizesDto = new List<GetDishSizeDto>();
-        //    var listOfDishSizes = await _context.DishSizes.Where(x => x.IsDeleted == false && x.DishId == DishId).ToListAsync();
-        //    if (listOfDishSizes.Any())
+        //    var listOfRecipeSizesDto = new List<GetRecipeSizeDto>();
+        //    var listOfRecipeSizes = await _context.RecipeSizes.Where(x => x.IsDeleted == false && x.RecipeId == RecipeId).ToListAsync();
+        //    if (listOfRecipeSizes.Any())
         //    {
-        //        foreach (var item in listOfDishSizes)
+        //        foreach (var item in listOfRecipeSizes)
         //        {
-        //            var dto = _mapper.Map<GetDishSizeDto>(item);
-        //            listOfDishSizesDto.Add(dto);
+        //            var dto = _mapper.Map<GetRecipeSizeDto>(item);
+        //            listOfRecipeSizesDto.Add(dto);
         //        }
         //    }
-        //    return listOfDishSizesDto;
+        //    return listOfRecipeSizesDto;
         //}
 
-        //// GET: api/Dishs/5
+        //// GET: api/Recipes/5
         //[HttpGet("{id}")]
-        //public async Task<ActionResult<GetDishDto>> GetDish(Guid id)
+        //public async Task<ActionResult<GetRecipeDto>> GetRecipe(Guid id)
         //{
-        //    var Dish = await _context.Dishes.Include(x => x.DishSizes).FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
+        //    var Recipe = await _context.Recipees.Include(x => x.RecipeSizes).FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
 
-        //    if (Dish == null)
+        //    if (Recipe == null)
         //    {
         //        return NotFound();
         //    }
-        //    var DishResult = _mapper.Map<GetDishDto>(Dish);
-        //    return DishResult;
+        //    var RecipeResult = _mapper.Map<GetRecipeDto>(Recipe);
+        //    return RecipeResult;
         //}
-        //[HttpGet("DishSizes/{id}")]
-        //public async Task<ActionResult<GetDishSizeDto>> GetDishSize(Guid id)
+        //[HttpGet("RecipeSizes/{id}")]
+        //public async Task<ActionResult<GetRecipeSizeDto>> GetRecipeSize(Guid id)
         //{
-        //    var DishSize = await _context.DishSizes.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
+        //    var RecipeSize = await _context.RecipeSizes.FirstOrDefaultAsync(x => x.Id == id && x.IsDeleted == false);
 
-        //    if (DishSize == null)
+        //    if (RecipeSize == null)
         //    {
         //        return NotFound();
         //    }
-        //    var DishSizeResult = _mapper.Map<GetDishSizeDto>(DishSize);
-        //    return DishSizeResult;
+        //    var RecipeSizeResult = _mapper.Map<GetRecipeSizeDto>(RecipeSize);
+        //    return RecipeSizeResult;
         //}
 
-        //// PUT: api/Dishs/5
+        //// PUT: api/Recipes/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]
-        //public async Task<ActionResult<GetDishDto>> PutDish(Guid id, UpdateDishDto DishDto)
+        //public async Task<ActionResult<GetRecipeDto>> PutRecipe(Guid id, UpdateRecipeDto RecipeDto)
         //{
-        //    if (id != DishDto.Id)
+        //    if (id != RecipeDto.Id)
         //    {
         //        return BadRequest();
         //    }
-        //    var Dish = _mapper.Map<Dish>(DishDto);
-        //    _context.Entry(Dish).State = EntityState.Modified;
+        //    var Recipe = _mapper.Map<Recipe>(RecipeDto);
+        //    _context.Entry(Recipe).State = EntityState.Modified;
         //    try
         //    {
         //        await _context.SaveChangesAsync();
@@ -97,7 +97,7 @@ namespace Project.Backend.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!DishExists(id))
+        //        if (!RecipeExists(id))
         //        {
         //            return NotFound();
         //        }
@@ -107,18 +107,18 @@ namespace Project.Backend.Controllers
         //        }
         //    }
 
-        //    return _mapper.Map<GetDishDto>(Dish);
+        //    return _mapper.Map<GetRecipeDto>(Recipe);
         //}
-        //[HttpPut("{DishId}/DishSizes/{id}")]
-        //public async Task<ActionResult<GetDishSizeDto>> PutDishSizeSize(Guid id, Guid DishId, UpdateDishSizeDto DishSizeDto)
+        //[HttpPut("{RecipeId}/RecipeSizes/{id}")]
+        //public async Task<ActionResult<GetRecipeSizeDto>> PutRecipeSizeSize(Guid id, Guid RecipeId, UpdateRecipeSizeDto RecipeSizeDto)
         //{
-        //    if (id != DishSizeDto.Id)
+        //    if (id != RecipeSizeDto.Id)
         //    {
         //        return BadRequest();
         //    }
-        //    var DishSize = _mapper.Map<DishSize>(DishSizeDto);
-        //    DishSize.DishId = DishId;
-        //    _context.Entry(DishSize).State = EntityState.Modified;
+        //    var RecipeSize = _mapper.Map<RecipeSize>(RecipeSizeDto);
+        //    RecipeSize.RecipeId = RecipeId;
+        //    _context.Entry(RecipeSize).State = EntityState.Modified;
         //    try
         //    {
         //        await _context.SaveChangesAsync();
@@ -126,7 +126,7 @@ namespace Project.Backend.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!DishSizeExists(id))
+        //        if (!RecipeSizeExists(id))
         //        {
         //            return NotFound();
         //        }
@@ -136,69 +136,69 @@ namespace Project.Backend.Controllers
         //        }
         //    }
 
-        //    return _mapper.Map<GetDishSizeDto>(DishSize);
+        //    return _mapper.Map<GetRecipeSizeDto>(RecipeSize);
         //}
 
-        //// POST: api/Dishs
+        //// POST: api/Recipes
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPost]
-        //public async Task<ActionResult<GetDishDto>> PostDish(CreateDishDto DishDto)
+        //public async Task<ActionResult<GetRecipeDto>> PostRecipe(CreateRecipeDto RecipeDto)
         //{
-        //    var Dish = _mapper.Map<Dish>(DishDto);
-        //    Dish.Id = Guid.NewGuid();
-        //    if (DishDto.DishSizes != null)
+        //    var Recipe = _mapper.Map<Recipe>(RecipeDto);
+        //    Recipe.Id = Guid.NewGuid();
+        //    if (RecipeDto.RecipeSizes != null)
         //    {
-        //        if (DishDto.DishSizes.Any())
+        //        if (RecipeDto.RecipeSizes.Any())
         //        {
-        //            Dish.DishSizes = new List<DishSize>();
-        //            foreach (var dishSize in Dish.DishSizes)
+        //            Recipe.RecipeSizes = new List<RecipeSize>();
+        //            foreach (var RecipeSize in Recipe.RecipeSizes)
         //            {
-        //                dishSize.DishId = Dish.Id;
-        //                Dish.DishSizes.Add(dishSize);
+        //                RecipeSize.RecipeId = Recipe.Id;
+        //                Recipe.RecipeSizes.Add(RecipeSize);
         //            }
         //        }
         //    }
-        //    _context.Dishes.Add(Dish);
+        //    _context.Recipees.Add(Recipe);
         //    await _context.SaveChangesAsync();
-        //    var DishToReturn = _mapper.Map<GetDishDto>(Dish);
+        //    var RecipeToReturn = _mapper.Map<GetRecipeDto>(Recipe);
 
-        //    return CreatedAtAction("GetDish", new { id = Dish.Id }, DishToReturn);
+        //    return CreatedAtAction("GetRecipe", new { id = Recipe.Id }, RecipeToReturn);
         //}
-        //[HttpPost("{DishId}/DishSize")]
-        //public async Task<ActionResult<GetDishSizeDto>> AddDishSizeSize(CreateDishSizeDto DishSizeDto, Guid DishId)
+        //[HttpPost("{RecipeId}/RecipeSize")]
+        //public async Task<ActionResult<GetRecipeSizeDto>> AddRecipeSizeSize(CreateRecipeSizeDto RecipeSizeDto, Guid RecipeId)
         //{
-        //    var DishSize = _mapper.Map<DishSize>(DishSizeDto);
-        //    DishSize.DishId = DishId;
-        //    _context.DishSizes.Add(DishSize);
+        //    var RecipeSize = _mapper.Map<RecipeSize>(RecipeSizeDto);
+        //    RecipeSize.RecipeId = RecipeId;
+        //    _context.RecipeSizes.Add(RecipeSize);
         //    await _context.SaveChangesAsync();
-        //    var DishSizeToReturn = _mapper.Map<GetDishSizeDto>(DishSize);
+        //    var RecipeSizeToReturn = _mapper.Map<GetRecipeSizeDto>(RecipeSize);
 
-        //    return CreatedAtAction("GetDishSize", new { id = DishSize.Id }, DishSizeToReturn);
+        //    return CreatedAtAction("GetRecipeSize", new { id = RecipeSize.Id }, RecipeSizeToReturn);
         //}
 
-        //// DELETE: api/Dishs/5
+        //// DELETE: api/Recipes/5
         //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteDish(Guid id)
+        //public async Task<IActionResult> DeleteRecipe(Guid id)
         //{
-        //    var Dish = await _context.Dishes.FindAsync(id);
-        //    if (Dish == null)
+        //    var Recipe = await _context.Recipees.FindAsync(id);
+        //    if (Recipe == null)
         //    {
         //        return NotFound();
         //    }
-        //    Dish.IsDeleted = true;
+        //    Recipe.IsDeleted = true;
         //    await _context.SaveChangesAsync();
 
         //    return NoContent();
         //}
-        //[HttpDelete("DishSize/{id}")]
-        //public async Task<IActionResult> DeleteDishSize(Guid id)
+        //[HttpDelete("RecipeSize/{id}")]
+        //public async Task<IActionResult> DeleteRecipeSize(Guid id)
         //{
-        //    var DishSize = await _context.DishSizes.FindAsync(id);
-        //    if (DishSize == null)
+        //    var RecipeSize = await _context.RecipeSizes.FindAsync(id);
+        //    if (RecipeSize == null)
         //    {
         //        return NotFound();
         //    }
-        //    DishSize.IsDeleted = true;
+        //    RecipeSize.IsDeleted = true;
         //    await _context.SaveChangesAsync();
 
         //    return NoContent();
@@ -206,24 +206,24 @@ namespace Project.Backend.Controllers
         //[HttpPost("addImage/{Id}")]
         //public async Task<IActionResult> UploadImage([FromForm] IFormFile ImageFile, Guid Id)
         //{
-        //    var Dish = await _context.Dishes.FirstOrDefaultAsync(x => x.Id == Id);
-        //    if (Dish == null)
+        //    var Recipe = await _context.Recipees.FirstOrDefaultAsync(x => x.Id == Id);
+        //    if (Recipe == null)
         //        return NotFound();
         //    string baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
         //    if (ImageFile == null || ImageFile.Length == 0)
         //    {
         //        return BadRequest("No image file uploaded.");
         //    }
-        //    var result = await _imageController.UploadImage(ImageFile, Id, baseUrl, "Dish");
+        //    var result = await _imageController.UploadImage(ImageFile, Id, baseUrl, "Recipe");
 
         //    if (result is ObjectResult objectResult && objectResult.Value is string imagePath)
         //    {
-        //        Dish.CoverUrl = imagePath;
-        //        Dish.UpdatedAt = DateTime.Now;
-        //        _context.Entry(Dish).State = EntityState.Modified;
+        //        Recipe.CoverUrl = imagePath;
+        //        Recipe.UpdatedAt = DateTime.Now;
+        //        _context.Entry(Recipe).State = EntityState.Modified;
         //        await _context.SaveChangesAsync();
-        //        var DishtoReurn = _mapper.Map<GetDishDto>(Dish);
-        //        return Ok(DishtoReurn);
+        //        var RecipetoReurn = _mapper.Map<GetRecipeDto>(Recipe);
+        //        return Ok(RecipetoReurn);
         //    }
         //    else
         //    {
@@ -232,13 +232,13 @@ namespace Project.Backend.Controllers
         //    }
         //}
 
-        //private bool DishExists(Guid id)
+        //private bool RecipeExists(Guid id)
         //{
-        //    return _context.Dishes.Any(e => e.Id == id && e.IsDeleted == false);
+        //    return _context.Recipees.Any(e => e.Id == id && e.IsDeleted == false);
         //}
-        //private bool DishSizeExists(Guid id)
+        //private bool RecipeSizeExists(Guid id)
         //{
-        //    return _context.DishSizes.Any(e => e.Id == id && e.IsDeleted == false);
+        //    return _context.RecipeSizes.Any(e => e.Id == id && e.IsDeleted == false);
         //}
 
     }

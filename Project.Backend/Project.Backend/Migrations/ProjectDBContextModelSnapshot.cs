@@ -22,81 +22,6 @@ namespace Project.Backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CategoryDish", b =>
-                {
-                    b.Property<Guid>("CategoriesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DishesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CategoriesId", "DishesId");
-
-                    b.HasIndex("DishesId");
-
-                    b.ToTable("CategoryDish");
-                });
-
-            modelBuilder.Entity("CourseDish", b =>
-                {
-                    b.Property<Guid>("CoursesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DishesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CoursesId", "DishesId");
-
-                    b.HasIndex("DishesId");
-
-                    b.ToTable("CourseDish");
-                });
-
-            modelBuilder.Entity("CuisineDish", b =>
-                {
-                    b.Property<Guid>("CuisinesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DishesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("CuisinesId", "DishesId");
-
-                    b.HasIndex("DishesId");
-
-                    b.ToTable("CuisineDish");
-                });
-
-            modelBuilder.Entity("DietDish", b =>
-                {
-                    b.Property<Guid>("DietsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DishesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DietsId", "DishesId");
-
-                    b.HasIndex("DishesId");
-
-                    b.ToTable("DietDish");
-                });
-
-            modelBuilder.Entity("DishRecommendation", b =>
-                {
-                    b.Property<Guid>("DishesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RecommendationsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DishesId", "RecommendationsId");
-
-                    b.HasIndex("RecommendationsId");
-
-                    b.ToTable("DishRecommendation");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
@@ -211,9 +136,11 @@ namespace Project.Backend.Migrations
 
             modelBuilder.Entity("Project.Backend.Entities.Address", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Appartment")
                         .HasColumnType("int");
@@ -255,11 +182,13 @@ namespace Project.Backend.Migrations
                     b.ToTable("Address", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Backend.Entities.Category", b =>
+            modelBuilder.Entity("Project.Backend.Entities.Collection", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CoverUrl")
                         .HasColumnType("nvarchar(max)");
@@ -270,10 +199,7 @@ namespace Project.Backend.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEn")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -281,14 +207,16 @@ namespace Project.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Collection");
                 });
 
             modelBuilder.Entity("Project.Backend.Entities.Course", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CoverUrl")
                         .HasColumnType("nvarchar(max)");
@@ -299,10 +227,7 @@ namespace Project.Backend.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEn")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -315,9 +240,11 @@ namespace Project.Backend.Migrations
 
             modelBuilder.Entity("Project.Backend.Entities.Cuisine", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CoverUrl")
                         .HasColumnType("nvarchar(max)");
@@ -328,10 +255,7 @@ namespace Project.Backend.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEn")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -342,90 +266,53 @@ namespace Project.Backend.Migrations
                     b.ToTable("Cuisines");
                 });
 
-            modelBuilder.Entity("Project.Backend.Entities.Diet", b =>
+            modelBuilder.Entity("Project.Backend.Entities.DietType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CoverUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Diets");
-                });
-
-            modelBuilder.Entity("Project.Backend.Entities.Dish", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Calories")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("CoverUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("Description")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEn")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfLikes")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Rate")
-                        .HasColumnType("decimal(18,2)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CoverUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dish", (string)null);
+                    b.ToTable("DietType");
                 });
 
             modelBuilder.Entity("Project.Backend.Entities.Favorite", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DishId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("RecipeId1")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -435,18 +322,253 @@ namespace Project.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DishId");
+                    b.HasIndex("RecipeId1");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Favorites");
                 });
 
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Calories")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CookingTime")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CuisineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfLikes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PostDates")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PrepTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Ratings")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RecommendationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Serves")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SkillLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CuisineId");
+
+                    b.HasIndex("RecommendationId");
+
+                    b.ToTable("Recipe", (string)null);
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeCollection", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CollectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "CollectionId");
+
+                    b.HasIndex("CollectionId");
+
+                    b.ToTable("FoodRecipeCollections");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeCourse", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("FoodRecipeCourses");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeDietType", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DietTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "DietTypeId");
+
+                    b.HasIndex("DietTypeId");
+
+                    b.ToTable("FoodRecipeDietTypes");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeIngredient", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "IngredientId");
+
+                    b.HasIndex("IngredientId");
+
+                    b.ToTable("FoodRecipeIngredients");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeKeyword", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KeywordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "KeywordId");
+
+                    b.HasIndex("KeywordId");
+
+                    b.ToTable("FoodRecipeKeywords");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeNutritionInfo", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NutritionInfoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecipeId", "NutritionInfoId");
+
+                    b.HasIndex("NutritionInfoId");
+
+                    b.ToTable("FoodRecipeNutritionInfos");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Ingredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Keyword", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CoverUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Keywords");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.NutritionInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NutritionInfos");
+                });
+
             modelBuilder.Entity("Project.Backend.Entities.Recommendation", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -577,81 +699,6 @@ namespace Project.Backend.Migrations
                     b.HasDiscriminator().HasValue("UserRole");
                 });
 
-            modelBuilder.Entity("CategoryDish", b =>
-                {
-                    b.HasOne("Project.Backend.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project.Backend.Entities.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CourseDish", b =>
-                {
-                    b.HasOne("Project.Backend.Entities.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project.Backend.Entities.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CuisineDish", b =>
-                {
-                    b.HasOne("Project.Backend.Entities.Cuisine", null)
-                        .WithMany()
-                        .HasForeignKey("CuisinesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project.Backend.Entities.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DietDish", b =>
-                {
-                    b.HasOne("Project.Backend.Entities.Diet", null)
-                        .WithMany()
-                        .HasForeignKey("DietsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project.Backend.Entities.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DishRecommendation", b =>
-                {
-                    b.HasOne("Project.Backend.Entities.Dish", null)
-                        .WithMany()
-                        .HasForeignKey("DishesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project.Backend.Entities.Recommendation", null)
-                        .WithMany()
-                        .HasForeignKey("RecommendationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Project.Backend.Entities.Role", null)
@@ -714,9 +761,9 @@ namespace Project.Backend.Migrations
 
             modelBuilder.Entity("Project.Backend.Entities.Favorite", b =>
                 {
-                    b.HasOne("Project.Backend.Entities.Dish", "Dish")
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
                         .WithMany("Favorites")
-                        .HasForeignKey("DishId")
+                        .HasForeignKey("RecipeId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -726,14 +773,195 @@ namespace Project.Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Dish");
+                    b.Navigation("Recipe");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Project.Backend.Entities.Dish", b =>
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipe", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.Cuisine", "Cuisine")
+                        .WithMany("Recipes")
+                        .HasForeignKey("CuisineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.Recommendation", null)
+                        .WithMany("Recipes")
+                        .HasForeignKey("RecommendationId");
+
+                    b.Navigation("Cuisine");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeCollection", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.Collection", "Collection")
+                        .WithMany("FoodRecipeCollections")
+                        .HasForeignKey("CollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
+                        .WithMany("FoodRecipeCollections")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Collection");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeCourse", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.Course", "Course")
+                        .WithMany("FoodRecipeCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
+                        .WithMany("FoodRecipeCourses")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeDietType", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.DietType", "DietType")
+                        .WithMany("FoodRecipeDietTypes")
+                        .HasForeignKey("DietTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
+                        .WithMany("FoodRecipeDietTypes")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DietType");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeIngredient", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.Ingredient", "Ingredient")
+                        .WithMany("FoodRecipeIngredients")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
+                        .WithMany("FoodRecipeIngredients")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ingredient");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeKeyword", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.Keyword", "Keyword")
+                        .WithMany("FoodRecipeKeywords")
+                        .HasForeignKey("KeywordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
+                        .WithMany("FoodRecipeKeywords")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Keyword");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipeNutritionInfo", b =>
+                {
+                    b.HasOne("Project.Backend.Entities.NutritionInfo", "NutritionInfo")
+                        .WithMany("FoodRecipeNutritionInfos")
+                        .HasForeignKey("NutritionInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
+                        .WithMany("FoodRecipeNutritionInfos")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NutritionInfo");
+
+                    b.Navigation("Recipe");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Collection", b =>
+                {
+                    b.Navigation("FoodRecipeCollections");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Course", b =>
+                {
+                    b.Navigation("FoodRecipeCourses");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Cuisine", b =>
+                {
+                    b.Navigation("Recipes");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.DietType", b =>
+                {
+                    b.Navigation("FoodRecipeDietTypes");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.FoodRecipe", b =>
                 {
                     b.Navigation("Favorites");
+
+                    b.Navigation("FoodRecipeCollections");
+
+                    b.Navigation("FoodRecipeCourses");
+
+                    b.Navigation("FoodRecipeDietTypes");
+
+                    b.Navigation("FoodRecipeIngredients");
+
+                    b.Navigation("FoodRecipeKeywords");
+
+                    b.Navigation("FoodRecipeNutritionInfos");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Ingredient", b =>
+                {
+                    b.Navigation("FoodRecipeIngredients");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Keyword", b =>
+                {
+                    b.Navigation("FoodRecipeKeywords");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.NutritionInfo", b =>
+                {
+                    b.Navigation("FoodRecipeNutritionInfos");
+                });
+
+            modelBuilder.Entity("Project.Backend.Entities.Recommendation", b =>
+                {
+                    b.Navigation("Recipes");
                 });
 
             modelBuilder.Entity("Project.Backend.Entities.User", b =>

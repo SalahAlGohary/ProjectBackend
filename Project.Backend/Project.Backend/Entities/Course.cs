@@ -4,8 +4,7 @@ namespace Project.Backend.Entities
 {
     public class Course : BaseEntityNameCover
     {
-        // List of Dishes
-        public virtual List<Dish>? Dishes { get; set; }
-
+        // List of Recipees
+        public virtual List<FoodRecipeCourse> FoodRecipeCourses { get; set; }
     }
 }
