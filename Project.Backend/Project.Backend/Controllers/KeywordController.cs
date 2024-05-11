@@ -29,9 +29,9 @@ namespace Project.Backend.Controllers
                 return NotFound();
         }
         [HttpGet()]
-        public async Task<ActionResult<List<KeywordDTO>>> GetAll()
+        public async Task<ActionResult<List<KeywordDTO>>> GetAll(int page = 1, int size = 10)
         {
-            var result = await _KeywordService.GetAllAsync();
+            var result = await _KeywordService.GetAllAsync(page, size);
             if (result != null)
             {
                 return Ok(result);

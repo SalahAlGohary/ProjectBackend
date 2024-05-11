@@ -25,9 +25,9 @@ namespace Project.Backend.Services
             }
             return null;
         }
-        public async Task<List<KeywordDTO>> GetAllAsync()
+        public async Task<List<KeywordDTO>> GetAllAsync(int page = 1, int size = 10)
         {
-            var KeywordTypes = await _KeywordRepository.GetAllAsync();
+            var KeywordTypes = await _KeywordRepository.GetAllAsync(page, size);
             if (KeywordTypes.Any())
             {
                 var KeywordTypeDtos = _mapper.Map<List<KeywordDTO>>(KeywordTypes);
