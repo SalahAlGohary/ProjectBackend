@@ -25,6 +25,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
                 .AsNoTracking().Where(q => !q.IsDeleted).Skip((page * size) - size).Take(size).ToListAsync();
 
         }
@@ -42,6 +43,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
                 .AsNoTracking().Where(q => !q.IsDeleted && q.CuisineId == cuisineId).Skip((page * size) - size).Take(size).ToListAsync();
 
         }
@@ -61,6 +63,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
                 .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
@@ -80,6 +83,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
                 .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
@@ -99,6 +103,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
             .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
@@ -118,6 +123,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
                 .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
@@ -136,6 +142,7 @@ namespace Project.Backend.Repositories
                  .Include(x => x.FoodRecipeKeywords)
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
                .AsNoTracking()
                .FirstOrDefaultAsync(q => q.Id == id && !q.IsDeleted);
 

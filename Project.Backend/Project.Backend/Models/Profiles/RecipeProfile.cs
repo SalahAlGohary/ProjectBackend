@@ -8,10 +8,12 @@ namespace Project.Backend.Models.Profiles
     {
         public RecipeProfile()
         {
+
             CreateMap<FoodRecipe, RecipeDTO>()
                  .ForMember(dest => dest.NutritionInfos, opt => opt.MapFrom(src => GetNutritionInfos(src.FoodRecipeNutritionInfos.Select(x => x.NutritionInfo).ToList())))
                  .ForMember(dest => dest.Ingredients, opt => opt.MapFrom(src => GetIngredients(src.FoodRecipeIngredients.Select(x => x.Ingredient).ToList())))
                  .ForMember(dest => dest.Keywords, opt => opt.MapFrom(src => GetKeywords(src.FoodRecipeKeywords.Select(x => x.Keyword).ToList())))
+                 .ForMember(dest => dest.CoverUrl, opt => opt.MapFrom(src => $"https://localhost:7198/Images/Recipe/{src.Id}.jpg"))
                  .ReverseMap();
             //CreateMap<CreateRecipeDto, FoodRecipe>()
             //    .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.Now));
@@ -30,6 +32,7 @@ namespace Project.Backend.Models.Profiles
             var nutritionInfoList = nutritionInfos.Select(x => x.Name).ToList();
             return nutritionInfoList;
         }
+
         private List<string> GetIngredients(List<Ingredient> ingredients)
         {
             if (ingredients == null || !ingredients.Any())

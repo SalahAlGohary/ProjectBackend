@@ -5,6 +5,6 @@ namespace Project.Backend.Contracts.Services
     public interface ICollectionService
     {
         Task<CollectionDTO> GetByIdAsync(int id);
-        Task<List<CollectionDTO>> GetAllAsync();
+        Task<List<CollectionDTO>> GetAllAsync(int page = 0, int size = 0);
     }
 }

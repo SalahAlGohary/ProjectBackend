@@ -25,9 +25,9 @@ namespace Project.Backend.Services
             }
             return null;
         }
-        public async Task<List<CollectionDTO>> GetAllAsync()
+        public async Task<List<CollectionDTO>> GetAllAsync(int page = 1, int size = 10)
         {
-            var Collections = await _CollectionRepository.GetAllAsync();
+            var Collections = await _CollectionRepository.GetAllAsync(page, size);
             if (Collections.Any())
             {
                 var CollectionDtos = _mapper.Map<List<CollectionDTO>>(Collections);

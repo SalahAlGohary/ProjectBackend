@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
@@ -24,6 +25,10 @@
 
   <ItemGroup>
     <Folder Include="Models\Dtos\User\" />
+    <Folder Include="wwwroot\Images\Course\" />
+    <Folder Include="wwwroot\Images\Collection\" />
+    <Folder Include="wwwroot\Images\DietType\" />
+    <Folder Include="wwwroot\Images\Recipe\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

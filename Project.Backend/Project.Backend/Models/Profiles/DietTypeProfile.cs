@@ -8,7 +8,10 @@ namespace Project.Backend.Models.Profiles
     {
         public DietTypeProfile()
         {
-            CreateMap<DietType, DietTypeDTO>().ReverseMap();
+            //CreateMap<DietType, DietTypeDTO>().ReverseMap();
+            CreateMap<DietType, DietTypeDTO>()
+            .ForMember(dest => dest.CoverUrl, opt => opt.MapFrom(src =>
+             $"https://localhost:7198/Images/DietType/{src.Name.ToLower()}.jpg"));
 
             //CreateMap<CreateRecipeDto, FoodRecipe>()
             //    .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.Now));

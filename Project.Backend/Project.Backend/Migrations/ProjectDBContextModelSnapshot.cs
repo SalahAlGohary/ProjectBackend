@@ -308,10 +308,7 @@ namespace Project.Backend.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("RecipeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("RecipeId1")
+                    b.Property<int>("RecipeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -322,7 +319,7 @@ namespace Project.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipeId1");
+                    b.HasIndex("RecipeId");
 
                     b.HasIndex("UserId");
 
@@ -644,6 +641,9 @@ namespace Project.Backend.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -763,7 +763,7 @@ namespace Project.Backend.Migrations
                 {
                     b.HasOne("Project.Backend.Entities.FoodRecipe", "Recipe")
                         .WithMany("Favorites")
-                        .HasForeignKey("RecipeId1")
+                        .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

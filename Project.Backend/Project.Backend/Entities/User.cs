@@ -4,6 +4,7 @@ namespace Project.Backend.Entities
     public class User : IdentityUser<Guid>
     {
         public string? Name { get; set; }
+        public string? Mail { get; set; }
         public string? PhotoUrl { get; set; }
         public DateTime? BirthDate { get; set; }
         public bool IsDeleted { get; set; } = false;

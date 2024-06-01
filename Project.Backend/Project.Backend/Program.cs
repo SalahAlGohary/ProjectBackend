@@ -1,10 +1,19 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using NativeBackend.Application.Common.Models.Identity;
 using Project.Backend.Contracts;
+using Project.Backend.Contracts.Identity;
+using Project.Backend.Contracts.Infrastructure;
 using Project.Backend.Contracts.Services;
 using Project.Backend.Entities;
 using Project.Backend.Repositories;
 using Project.Backend.Services;
+using Project.Backend.Services.Identity;
+using Project.Backend.Services.ImageService;
 using System.Reflection;
+using System.Text;
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
     .Build();
@@ -17,12 +26,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+//builder.Services.AddTransient<HttpContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 builder.Services.AddDbContext<ProjectDBContext>(options =>
 options.UseSqlServer(
            configuration.GetConnectionString("ProjectBackendConnectionString"))
 );
+
 builder.Services.AddTransient<ImageController>();
 builder.Services.AddTransient<IAddressRepository, AddressRepository>();
 builder.Services.AddTransient<IRecipeRepository, RecipeRepository>();
@@ -42,8 +53,33 @@ builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddTransient<IFavoriteService, FavoriteService>();
 builder.Services.AddTransient<IRecommendationService, RecommendationService>();
 builder.Services.AddTransient<IKeywordService, KeywordService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IFormFileImagesService, FormFileImagesService>();
 
-
+builder.Services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+builder.Services.AddIdentity<User, Role>()
+    .AddEntityFrameworkStores<ProjectDBContext>().AddDefaultTokenProviders();
+builder.Services.AddSingleton<IWebHostEnvironment>(builder.Environment);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(o =>
+    {
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero,
+            ValidIssuer = configuration["JwtSettings:Issuer"],
+            ValidAudience = configuration["JwtSettings:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
+        };
+    });
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("CorsPolicy",
@@ -64,7 +100,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseStaticFiles();
 
 app.MapControllers();
 app.UseSwagger();
