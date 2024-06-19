@@ -6,6 +6,7 @@ namespace Project.Backend.Contracts.Services
     {
         Task<RecipeDTO> GetByIdAsync(int id);
         Task<List<RecipeDTO>> GetAllAsync(int page = 1, int size = 10);
+        Task<List<RecipeDTO>> GetByNameAsync(string name, int page = 1, int size = 10);
         Task<IEnumerable<RecipeDTO>> GetAllByCuisineAsync(int cuisineId, int page = 1, int size = 10);
         Task<IEnumerable<RecipeDTO>> GetAllByKeywordAsync(int keywordId, int page = 1, int size = 10);
         Task<IEnumerable<RecipeDTO>> GetAllByCollectionAsync(int collectionId, int page = 1, int size = 10);

@@ -11,7 +11,7 @@ namespace Project.Backend.Models.Profiles
             //CreateMap<Course, CourseDTO>().ReverseMap();
             CreateMap<Course, CourseDTO>()
            .ForMember(dest => dest.CoverUrl, opt => opt.MapFrom(src =>
-               $"https://localhost:7198/Images/Course/{src.Name.ToLower()}.jpg"));
+               $"http://salahmohammed-001-site1.ctempurl.com/Images/Course/{src.Id}.jpg"));
 
             //CreateMap<CreateRecipeDto, FoodRecipe>()
             //    .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.Now));

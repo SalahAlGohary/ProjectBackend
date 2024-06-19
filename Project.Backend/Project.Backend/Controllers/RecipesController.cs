@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Project.Backend.Contracts.Identity;
 using Project.Backend.Contracts.Services;
 using Project.Backend.Models.Dtos;
@@ -41,6 +40,17 @@ namespace Project.Backend.Controllers
         public async Task<ActionResult<List<RecipeDTO>>> GetAll(int page = 1, int size = 10)
         {
             var result = await _recipeService.GetAllAsync();
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            else
+                return NotFound();
+        }
+        [HttpGet("getbyname/{name}")]
+        public async Task<ActionResult<List<RecipeDTO>>> GetAllByKeyword(string name, int page = 1, int size = 10)
+        {
+            var result = await _recipeService.GetByNameAsync(name);
             if (result != null)
             {
                 return Ok(result);
@@ -104,7 +114,6 @@ namespace Project.Backend.Controllers
                 return NotFound();
         }
         [HttpPost("AddToFavorite/{recipeId}")]
-        [Authorize]
         public async Task<ActionResult> AddToFavorite(int recipeId)
         {
             var userIdString = _userService.UserId;
@@ -116,7 +125,6 @@ namespace Project.Backend.Controllers
 
         }
         [HttpPost("RemoveFromFavorite/{recipeId}")]
-        [Authorize]
         public async Task<ActionResult> RemoveFromFavorite(int recipeId)
         {
             var userIdString = _userService.UserId;
@@ -128,7 +136,6 @@ namespace Project.Backend.Controllers
 
         }
         [HttpGet("GetAllFavorites")]
-        [Authorize]
         public async Task<ActionResult> GetAllFavorites()
         {
             var userIdString = _userService.UserId;

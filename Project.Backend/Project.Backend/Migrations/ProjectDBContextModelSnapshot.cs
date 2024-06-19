@@ -207,7 +207,7 @@ namespace Project.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Collection");
+                    b.ToTable("Collections");
                 });
 
             modelBuilder.Entity("Project.Backend.Entities.Course", b =>

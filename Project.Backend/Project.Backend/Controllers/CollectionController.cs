@@ -6,13 +6,13 @@ namespace Project.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CollectionControllerController : ControllerBase
+    public class CollectionController : ControllerBase
     {
         private readonly ICollectionService _CollectionService;
         //private readonly IMapper _mapper;
         //private readonly ImageController _imageController;
 
-        public CollectionControllerController(ICollectionService CollectionService)
+        public CollectionController(ICollectionService CollectionService)
         {
             _CollectionService = CollectionService;
         }
@@ -29,9 +29,9 @@ namespace Project.Backend.Controllers
                 return NotFound();
         }
         [HttpGet()]
-        public async Task<ActionResult<List<CollectionDTO>>> GetAll()
+        public async Task<ActionResult<List<CollectionDTO>>> GetAll(int page = 1, int size = 10)
         {
-            var result = await _CollectionService.GetAllAsync();
+            var result = await _CollectionService.GetAllAsync(page, size);
             if (result != null)
             {
                 return Ok(result);

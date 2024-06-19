@@ -180,6 +180,30 @@ namespace Project.Backend.Services
             }
             return recipeDto;
         }
+
+        public async Task<List<RecipeDTO>> GetByNameAsync(string name, int page = 1, int size = 10)
+        {
+            var recipeDtoList = new List<RecipeDTO>();
+            var recipeList = await _recipeRepository.GetByNameAsync(name, page, size);
+            if (recipeList.Any())
+            {
+                var userIdString = _userService.UserId;
+                if (userIdString != null)
+                {
+                    var userId = new Guid(userIdString);
+                    foreach (var item in recipeList)
+                    {
+                        var recipeDto = _mapper.Map<RecipeDTO>(item);
+                        recipeDto.IsFavorite = IsFavorite(userId, item);
+                        recipeDtoList.Add(recipeDto);
+                    }
+                }
+                recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
+                return recipeDtoList;
+            }
+            return null;
+        }
+
         public bool IsFavorite(Guid userId, FoodRecipe recipe)
         {
             var result = recipe.Favorites.FirstOrDefault(x => x.UserId == userId);

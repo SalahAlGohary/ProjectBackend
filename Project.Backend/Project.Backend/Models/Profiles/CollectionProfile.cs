@@ -11,7 +11,7 @@ namespace Project.Backend.Models.Profiles
             //CreateMap<Collection, CollectionDTO>().ReverseMap();
             CreateMap<Collection, CollectionDTO>()
           .ForMember(dest => dest.CoverUrl, opt => opt.MapFrom(src =>
-              $"https://localhost:7198/Images/Collection/{src.Name.ToLower()}.jpg"));
+              $"http://salahmohammed-001-site1.ctempurl.com/Images/Collection/{src.Id}.jpg"));
             //CreateMap<CreateRecipeDto, FoodRecipe>()
             //    .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.Now));
 

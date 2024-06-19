@@ -11,10 +11,9 @@ namespace Project.Backend.Repositories
         {
             _context = context;
         }
-        public async Task<IEnumerable<Collection>> GetAllAsync(int page = 1, int size = 10)
+        public async Task<List<Collection>> GetAllAsync(int page = 1, int size = 10)
         {
-            var result = await _context.Collections.AsNoTracking().Where(x => !x.IsDeleted).Skip((page * size) - size).Take(size).ToListAsync();
-            return result;
+            return await _context.Set<Collection>().AsNoTracking().Skip((page * size) - size).Take(size).ToListAsync();
         }
 
     }

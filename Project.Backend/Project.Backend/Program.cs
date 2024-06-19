@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using NativeBackend.Application.Common.Models.Identity;
 using Project.Backend.Contracts;
 using Project.Backend.Contracts.Identity;
@@ -24,7 +25,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+
+    c.AddSecurityDefinition("CustomToken", new OpenApiSecurityScheme
+    {
+        Name = "X-Custom-Token",
+        Type = SecuritySchemeType.ApiKey,
+        In = ParameterLocation.Header,
+        Description = "Enter your token in the text input below."
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "CustomToken"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 
 //builder.Services.AddTransient<HttpContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -80,6 +107,7 @@ builder.Services.AddAuthentication(options =>
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
         };
     });
+
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("CorsPolicy",
@@ -97,6 +125,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<CustomTokenMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

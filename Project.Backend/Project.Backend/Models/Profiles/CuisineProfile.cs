@@ -12,7 +12,7 @@ namespace Project.Backend.Models.Profiles
 
             CreateMap<Cuisine, CuisineDTO>()
            .ForMember(dest => dest.CoverUrl, opt => opt.MapFrom(src =>
-               $"https://localhost:7198/Images/Cuisine/{src.Name.ToLower()}.jpg"));
+               $"http://salahmohammed-001-site1.ctempurl.com/Images/Cuisine/{src.Id}.jpg"));
 
         }
 

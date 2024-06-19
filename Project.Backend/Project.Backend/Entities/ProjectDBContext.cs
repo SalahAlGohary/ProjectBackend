@@ -11,7 +11,7 @@ namespace Project.Backend.Entities
         public DbSet<FoodRecipe> Recipes { get; set; }
         public DbSet<Cuisine> Cuisines { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Collection> Categories { get; set; }
+        //public DbSet<Collection> Categories { get; set; }
         public DbSet<DietType> Diets { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Recommendation> Recommendations { get; set; }

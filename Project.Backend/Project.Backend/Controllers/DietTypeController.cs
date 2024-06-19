@@ -6,13 +6,13 @@ namespace Project.Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DietTypeControllerController : ControllerBase
+    public class DietTypeController : ControllerBase
     {
         private readonly IDietService _DietService;
         //private readonly IMapper _mapper;
         //private readonly ImageController _imageController;
 
-        public DietTypeControllerController(IDietService DietService)
+        public DietTypeController(IDietService DietService)
         {
             _DietService = DietService;
         }

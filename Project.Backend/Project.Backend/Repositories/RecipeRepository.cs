@@ -147,5 +147,24 @@ namespace Project.Backend.Repositories
                .FirstOrDefaultAsync(q => q.Id == id && !q.IsDeleted);
 
         }
+
+        public async Task<IEnumerable<FoodRecipe>> GetByNameAsync(string name, int page = 1, int size = 10)
+        {
+            var result = await _context.Set<FoodRecipe>()
+                .Include(x => x.FoodRecipeIngredients)
+                .ThenInclude(x => x.Ingredient)
+                 .Include(x => x.FoodRecipeCollections)
+                .ThenInclude(x => x.Collection)
+                 .Include(x => x.FoodRecipeCourses)
+                .ThenInclude(x => x.Course)
+                 .Include(x => x.FoodRecipeNutritionInfos)
+                .ThenInclude(x => x.NutritionInfo)
+                 .Include(x => x.FoodRecipeKeywords)
+                .ThenInclude(x => x.Keyword)
+                .Include(x => x.Cuisine)
+                .Include(x => x.Favorites)
+                .AsNoTracking().Where(q => !q.IsDeleted && q.Name.Contains(name)).Skip((page * size) - size).Take(size).ToListAsync();
+            return result;
+        }
     }
 }
