@@ -31,6 +31,10 @@ namespace Project.Backend.Services
             if (favorites.Any())
             {
                 var favoritesDto = _mapper.Map<List<FavoriteDTO>>(favorites);
+                foreach (var item in favoritesDto)
+                {
+                    item.Recipe.IsFavorite = true;
+                }
                 return favoritesDto;
             }
             return null;

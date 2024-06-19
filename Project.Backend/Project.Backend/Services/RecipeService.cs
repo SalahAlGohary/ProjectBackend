@@ -38,6 +38,7 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
@@ -61,6 +62,7 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
@@ -84,6 +86,8 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
+
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
@@ -107,6 +111,8 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
+
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
@@ -130,6 +136,8 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
+
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
@@ -154,6 +162,8 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
+
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
@@ -197,6 +207,8 @@ namespace Project.Backend.Services
                         recipeDto.IsFavorite = IsFavorite(userId, item);
                         recipeDtoList.Add(recipeDto);
                     }
+                    return recipeDtoList;
+
                 }
                 recipeDtoList = _mapper.Map<List<RecipeDTO>>(recipeList);
                 return recipeDtoList;
