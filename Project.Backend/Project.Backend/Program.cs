@@ -83,6 +83,7 @@ builder.Services.AddTransient<IKeywordService, KeywordService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IFormFileImagesService, FormFileImagesService>();
+builder.Services.AddTransient<IOAuthTokenUserRepository, OAuthTokenUserRepository>();
 
 builder.Services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 builder.Services.AddIdentity<User, Role>()

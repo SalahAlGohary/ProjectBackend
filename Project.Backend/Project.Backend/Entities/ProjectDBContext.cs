@@ -25,6 +25,7 @@ namespace Project.Backend.Entities
         public DbSet<Keyword> Keywords { get; set; }
         public DbSet<FoodRecipeKeyword> FoodRecipeKeywords { get; set; }
         public DbSet<NutritionInfo> NutritionInfos { get; set; }
+        public DbSet<OAuthTokenUser> OAuthTokenUsers { get; set; }
         public DbSet<FoodRecipeNutritionInfo> FoodRecipeNutritionInfos { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

@@ -9,6 +9,7 @@ namespace NativeBackend.Application.Common.Models.Identity
         public string PhoneNumber { get; set; }
         public string? LogoImagePath { get; set; }
         public string? Mail { get; set; }
+        public string? TwitterUserName { get; set; }
         //public string? Language { get; set; }
         //public bool? SendNotification { get; set; } = true;
         public DateTime? BirthDate { get; set; }

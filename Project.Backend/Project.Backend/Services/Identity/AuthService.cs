@@ -75,10 +75,12 @@ namespace Project.Backend.Services.Identity
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, "User");
-                        //await SendVerificationCode(user);
+                        JwtSecurityToken jwtSecurityToken = await GenerateToken(user);
+                        AuthResponse Profile = CreateAuthResponse(user, jwtSecurityToken);
                         response.clearBody();
                         response.StatusCode = AppConstants.Success;
-                        response.AddModel(AppConstants.Model, true);
+                        response.AddModel(AppConstants.Model, Profile);
+                        //await SendVerificationCode(user);
                         //response.AddMeta(AppConstants.Message, AppConstants.SuccessMessage);
                         return response;
                     }
@@ -86,7 +88,7 @@ namespace Project.Backend.Services.Identity
                     {
                         response.clearBody();
                         response.StatusCode = AppConstants.InternalServerError;
-                        response.AddError(AppConstants.Error, $"{result.Errors}");
+                        response.AddError(AppConstants.Error, result.Errors);
                         //response.AddError(AppConstants.Code, AppConstants.Error_try_later);
                         return response;
                     }
@@ -372,7 +374,8 @@ namespace Project.Backend.Services.Identity
                 LogoImagePath = user.PhotoUrl,
                 Name = user.Name,
                 BirthDate = user.BirthDate,
-                Mail = user.Mail
+                Mail = user.Mail,
+                TwitterUserName = user.TwitterUserName
             };
         }
         public async Task<IdentityResponse> EditProfile(EditProfileRequest request)
@@ -393,6 +396,8 @@ namespace Project.Backend.Services.Identity
                 //user.BirthDate = DateTime.SpecifyKind(request.BirthDate.Value, DateTimeKind.Utc);
                 if (request.Name != null)
                     user.Name = request.Name;
+                if (request.TwitterUserName != null)
+                    user.TwitterUserName = request.TwitterUserName;
                 if (request.Mail != null)
                     user.Mail = request.Mail;
                 if (request.Phone != null)
@@ -550,7 +555,8 @@ namespace Project.Backend.Services.Identity
                 LogoImagePath = user.PhotoUrl,
                 Name = user.Name,
                 BirthDate = user.BirthDate,
-                Mail = user.Mail
+                Mail = user.Mail,
+                TwitterUserName = user.TwitterUserName
             };
         }
 

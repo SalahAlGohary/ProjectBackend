@@ -8,6 +8,7 @@ namespace Project.Backend.Entities
         public string? PhotoUrl { get; set; }
         public DateTime? BirthDate { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public string? TwitterUserName { get; set; }
         public virtual List<Favorite>? Favorites { get; set; }
         public virtual List<Address>? Addresses { get; set; }
 

@@ -47,14 +47,24 @@ namespace Project.Backend.Controllers
             else
                 return NotFound();
         }
-        [HttpGet("getbyname/{name}")]
-        public async Task<ActionResult<List<RecipeDTO>>> GetAllByKeyword(string name, int page = 1, int size = 10)
+        [HttpGet("getbynames/{names}")]
+        public async Task<ActionResult<List<RecipeDTO>>> GetAllByName(List<string> names, int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetByNameAsync(name);
-            if (result != null)
+            if (names == null)
+                return NotFound();
+            if (names.Count == 0)
+                return NotFound();
+            var resultList = new List<RecipeDTO>();
+            foreach (string name in names)
             {
-                return Ok(result);
+                var result = await _recipeService.GetByNameAsync(name);
+                if (result != null)
+                {
+                    resultList.AddRange(result);
+                }
             }
+            if (resultList.Count > 0)
+                return Ok(resultList);
             else
                 return NotFound();
         }
