@@ -39,7 +39,7 @@ namespace Project.Backend.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<RecipeDTO>>> GetAll(int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetAllAsync();
+            var result = await _recipeService.GetAllAsync(page, size);
             if (result != null)
             {
                 return Ok(result);
@@ -57,7 +57,7 @@ namespace Project.Backend.Controllers
             var resultList = new List<RecipeDTO>();
             foreach (string name in names)
             {
-                var result = await _recipeService.GetByNameAsync(name);
+                var result = await _recipeService.GetByNameAsync(name, page, size);
                 if (result != null)
                 {
                     resultList.AddRange(result);
@@ -71,7 +71,7 @@ namespace Project.Backend.Controllers
         [HttpGet("getbykeyword/{keywordId}")]
         public async Task<ActionResult<List<RecipeDTO>>> GetAllByKeyword(int keywordId, int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetAllByKeywordAsync(keywordId);
+            var result = await _recipeService.GetAllByKeywordAsync(keywordId, page, size);
             if (result != null)
             {
                 return Ok(result);
@@ -82,7 +82,7 @@ namespace Project.Backend.Controllers
         [HttpGet("getbycuisine/{cuisineId}")]
         public async Task<ActionResult<List<RecipeDTO>>> GetAllByCuisine(int cuisineId, int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetAllByCuisineAsync(cuisineId);
+            var result = await _recipeService.GetAllByCuisineAsync(cuisineId, page, size);
             if (result != null)
             {
                 return Ok(result);
@@ -93,7 +93,7 @@ namespace Project.Backend.Controllers
         [HttpGet("getbydiettype/{diettypeId}")]
         public async Task<ActionResult<List<RecipeDTO>>> GetAllByDietType(int diettypeId, int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetAllByDietTypeAsync(diettypeId);
+            var result = await _recipeService.GetAllByDietTypeAsync(diettypeId, page, size);
             if (result != null)
             {
                 return Ok(result);
@@ -104,7 +104,7 @@ namespace Project.Backend.Controllers
         [HttpGet("getbycollection/{collectionId}")]
         public async Task<ActionResult<List<RecipeDTO>>> GetAllByCollection(int collectionId, int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetAllByCollectionAsync(collectionId);
+            var result = await _recipeService.GetAllByCollectionAsync(collectionId, page, size);
             if (result != null)
             {
                 return Ok(result);
@@ -115,7 +115,7 @@ namespace Project.Backend.Controllers
         [HttpGet("getbycourse/{courseId}")]
         public async Task<ActionResult<List<RecipeDTO>>> GetAllByCourseAsync(int courseId, int page = 1, int size = 10)
         {
-            var result = await _recipeService.GetAllByCourseAsync(courseId);
+            var result = await _recipeService.GetAllByCourseAsync(courseId, page, size);
             if (result != null)
             {
                 return Ok(result);
