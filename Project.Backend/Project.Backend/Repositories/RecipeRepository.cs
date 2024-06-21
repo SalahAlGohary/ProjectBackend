@@ -26,7 +26,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-                .AsNoTracking().Where(q => !q.IsDeleted).Skip((page * size) - size).Take(size).ToListAsync();
+                .AsNoTracking().Where(q => !q.IsDeleted).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
 
         }
         public virtual async Task<IEnumerable<FoodRecipe>> GetAllByCuisineAsync(int cuisineId, int page = 1, int size = 10)
@@ -44,7 +44,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-                .AsNoTracking().Where(q => !q.IsDeleted && q.CuisineId == cuisineId).Skip((page * size) - size).Take(size).ToListAsync();
+                .AsNoTracking().Where(q => !q.IsDeleted && q.CuisineId == cuisineId).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
 
         }
         public virtual async Task<IEnumerable<FoodRecipe>> GetAllByKeywordAsync(int keywordId, int page = 1, int size = 10)
@@ -64,7 +64,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-                .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
+                .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
         public virtual async Task<IEnumerable<FoodRecipe>> GetAllByCollectionAsync(int collectionId, int page = 1, int size = 10)
@@ -84,7 +84,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-                .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
+                .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
         public virtual async Task<IEnumerable<FoodRecipe>> GetAllByCourseAsync(int courseId, int page = 1, int size = 10)
@@ -104,7 +104,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-            .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
+            .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
         public virtual async Task<IEnumerable<FoodRecipe>> GetAllByDietTypeAsync(int dietTypeId, int page = 1, int size = 10)
@@ -124,7 +124,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-                .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).Skip((page * size) - size).Take(size).ToListAsync();
+                .AsNoTracking().Where(q => !q.IsDeleted && RecipeIds.Contains(q.Id)).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
 
@@ -163,7 +163,7 @@ namespace Project.Backend.Repositories
                 .ThenInclude(x => x.Keyword)
                 .Include(x => x.Cuisine)
                 .Include(x => x.Favorites)
-                .AsNoTracking().Where(q => !q.IsDeleted && q.Name.Contains(name)).Skip((page * size) - size).Take(size).ToListAsync();
+                .AsNoTracking().Where(q => !q.IsDeleted && q.Name.Contains(name)).OrderByDescending(x => x.Ratings).Skip((page * size) - size).Take(size).ToListAsync();
             return result;
         }
     }
